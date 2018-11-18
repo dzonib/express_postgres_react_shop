@@ -1,0 +1,30 @@
+{
+  "name": "mern_shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dzonib/mern_shop.git"
+  },
+  "author": "dzoni b",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dzonib/mern_shop/issues"
+  },
+  "homepage": "https://github.com/dzonib/mern_shop#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  }
+}
