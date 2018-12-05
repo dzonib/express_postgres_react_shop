@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         font-size: 1.6rem;
         line-height: 2;
+        color: ${props => props.theme.black} ;
         
 
         a {

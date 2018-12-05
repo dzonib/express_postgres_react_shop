@@ -27,6 +27,15 @@ const StyledAddProductForm = styled.form`
         outline-color: ${props => props.theme.darkGreen};
         line-height: 2rem;
         font-size: 95%;
+        border-radius: 3px;
+    }
+    textarea {
+        width: 100%;
+        border: 1px solid ${props => props.theme.darkGreen};
+        outline-color: ${props => props.theme.darkGreen};
+        font-size: 95%;
+        margin-top: 3.5px;
+        border-radius: 3px;
     }
 `
 

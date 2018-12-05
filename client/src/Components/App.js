@@ -1,26 +1,37 @@
 import React, { Component } from 'react'
 import { ThemeProvider } from 'styled-components'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {Provider} from 'react-redux'
 
 import theme from '../styles/globalStyles/theme'
 import Header from './Layout/Header'
 import GlobalStyle from '../styles/globalStyles/GlobalStyles'
-import AddProduct from './Product/AddProduct';
-import CartItemsList from './Product/CartItemsList';
+import AddProduct from './Product/AddProduct'
+import CartItemsList from './Product/CartItemsList'
+import store from '../redux/store'
+import ProductDetails from './Product/ProductDetails'
+import UpdateProduct from './Product/UpdateProduct'
 
 class App extends Component {
 	render() {
 		return (
-			<Router>
-				<ThemeProvider theme={theme}>
-        <>
-						<Header />
-						<Route exact path='/' component={CartItemsList} />
-						<Route path='/add-product' component={AddProduct} />
-					<GlobalStyle />
-        </>  
-				</ThemeProvider>
-			</Router>
+			<Provider store={store}>
+				<Router>
+					<ThemeProvider theme={theme}>
+						<>
+							<Header />
+							<Switch>
+								<Route exact path='/' component={CartItemsList} />
+								<Route exact path='/add-product' component={AddProduct} />
+								<Route exact path='/admin/products' component={CartItemsList} />
+								<Route exact path='/get-product/:id' component={ProductDetails} />
+								<Route exact path='/product/update' component={UpdateProduct} />
+							</Switch>
+							<GlobalStyle />
+						</>  
+					</ThemeProvider>
+				</Router>
+			</Provider>
 		)
 	}
 }

@@ -1,27 +1,67 @@
 import React, {Component} from 'react'
-import {items} from '../../fakeDB'
+import { connect } from 'react-redux'
 
+import { getProducts } from '../../redux/actions/product/getProducts'
+import CartItem from './CartItem';
+import StyledProductsList from '../../styles/Product/StyledProductsList'
+import AdminProducts from './AdminProducts'
+import { getProduct } from '../../redux/actions/product/getProduct'
 
-export default class CartItemsList extends Component {
+class CartItemsList extends Component {
 
     state = {
+        admin: false,
         items: []
     }
 
     componentDidMount() {
-        this.setState({items})
+        this.props.getProducts()
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.products) {
+            return {
+                items: props.products
+            }
+        }
+    }
+
+    handleDetails = (id) => {
+        // CALL ACTION TO GET PRODUCT HERE
+        this.props.getProduct(id, this.props.history)
     }
 
     render() {
-        console.log(this.state)
         return (
-            <div>
-                {
-                    this.state.items.map(item => {
-                        return <h1 key={item.title}>{item.title}</h1>
-                    })
-                }
-            </div>
+            <>
+                <h1>See (and buy) our products</h1>
+                <StyledProductsList>
+                    {
+                        this.state.items.map(item => {
+                            if (this.props.location.pathname === "/admin/products") {
+                                return <AdminProducts 
+                                    key={item.id} {...item} {...this.props}
+                                />
+                            } else {
+                                return <CartItem 
+                                    key={item.id} 
+                                    {...item} 
+                                    handleDetails={this.handleDetails} 
+                                />
+                            }
+                        })
+                    }
+                </StyledProductsList>
+            </>
+     
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        products: state.productReducer.products
+    }
+}
+
+export default connect( mapStateToProps, { getProducts, getProduct })(CartItemsList)
