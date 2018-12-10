@@ -31,6 +31,7 @@ class CartItemsList extends Component {
         this.props.getProduct(id, this.props.history)
     }
 
+
     render() {
         return (
             <>
@@ -46,6 +47,7 @@ class CartItemsList extends Component {
                                 return <CartItem 
                                     key={item.id} 
                                     {...item} 
+                                    history={this.props.history}
                                     handleDetails={this.handleDetails} 
                                 />
                             }

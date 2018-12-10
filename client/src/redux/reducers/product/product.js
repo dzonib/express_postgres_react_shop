@@ -1,8 +1,9 @@
-import { GET_PRODUCTS, GET_PRODUCT } from "../../types";
+import { GET_PRODUCTS, GET_PRODUCT, GET_CART } from "../../types"
 
 const initialState = {
 	products: [],
-	product: {}
+	product: {},
+	cart: []
 }
 
 const addProductReducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const addProductReducer = (state = initialState, action) => {
 			}
 		case GET_PRODUCTS:
 			return {...state, products: action.products}
+		case GET_CART:
+			return {
+				...state,
+				cart: action.payload
+			}
 		default:
 			return state
 	}
