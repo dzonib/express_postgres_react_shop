@@ -15,7 +15,7 @@ const Nav = () => {
 				<NavLink to="/cart">Cart</NavLink>
 			</li>
 			<li>
-				<NavLink to="/order">Order</NavLink>
+				<NavLink to="/orders">Order</NavLink>
 			</li>
 			<li>
 				<NavLink to="/add-product">Add Product</NavLink>

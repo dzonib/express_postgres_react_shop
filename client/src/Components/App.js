@@ -11,7 +11,8 @@ import CartItemsList from './Product/CartItemsList'
 import store from '../redux/store'
 import ProductDetails from './Product/ProductDetails'
 import UpdateProduct from './Product/UpdateProduct'
-import ProductsInUsersCart from './Cart/ProductsInUsersCart';
+import ProductsInUsersCart from './Cart/ProductsInUsersCart'
+import OrderList from './Orders/OrderList'
 
 class App extends Component {
 	render() {
@@ -28,6 +29,7 @@ class App extends Component {
 								<Route exact path='/get-product/:id' component={ProductDetails} />
 								<Route exact path='/product/update' component={UpdateProduct} />
 								<Route exact path='/cart' component={ProductsInUsersCart} />
+								<Route exact path='/orders' component={OrderList} />
 							</Switch>
 							<GlobalStyle />
 						</>  

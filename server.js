@@ -4,6 +4,7 @@ import cors from 'cors'
 
 import productRoutes from './routes/admin/product'
 import shopRoutes from './routes/shop/product'
+import userRoutes from './routes/user/user'
 import sequelize from './db/database'
 import Product from './models/product'
 import User from './models/user'
@@ -17,18 +18,19 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-app.use(async (req, res, next) => {
-	try {
-		const user = await User.findByPk(1)
-		req.user = user
-		next()
-	} catch (e) {
-		console.log(e)
-	}
-})
+// app.use(async (req, res, next) => {
+// 	try {
+// 		const user = await User.findByPk(1)
+// 		req.user = user
+// 		next()
+// 	} catch (e) {
+// 		console.log(e)
+// 	}
+// })
 
 app.use('/api/admin', productRoutes)
 app.use('/api/shop', shopRoutes)
+app.use('/api/user', userRoutes)
 
 const port = process.env.PORT || 5000
 
@@ -43,29 +45,4 @@ Order.belongsTo(User)
 User.hasMany(Order)
 Order.belongsToMany(Product, { through: OrderItem })
 
-sequelize
-	// .sync({force: true})
-	.sync()
-	.then(() => {
-		return User.findByPk(1) 
-	})
-	.then((user) => {
-		if (!user) {
-			return User.create({ name: 'God', email: 'whatup@lol.com' })
-		}
-		return user
-	})
-	.then((user) => {
-		// console.log(user)
-		user.getCart()
-			.then(cart => {
-				if (!cart) {
-					return user.createCart()
-
-				}
-			})
-			return user
-	}).then(cart => {
-		app.listen(port, console.log(`App running on http://localhost:${port}`))
-	})
-	.catch((e) => console.log(e))
+sequelize.sync().then(() => app.listen(port, () => console.log(`App running on http://localhost:${port}`)))

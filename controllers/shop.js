@@ -1,4 +1,5 @@
 import Product from '../models/product'
+import User from '../models/user'
 
 export const getProducts = async (req, res, next) => {
 	try {
@@ -20,7 +21,8 @@ export const getProduct = async (req, res, next) => {
 
 export const getCartAndProduct = async (req, res, next) => {
 	try {
-		const cart = await req.user.getCart()
+		const user = await User.findByPk(req.user.id)
+		const cart = await user.getCart()
 		const cartAndProduct = await cart.getProducts()
 
 		const rtrn = cartAndProduct.map((item) => {
@@ -39,7 +41,8 @@ export const getCartAndProduct = async (req, res, next) => {
 
 export const getCart = async (req, res, next) => {
 	try {
-		const cart = await req.user.getCart()
+		const user = await User.findByPk(req.user.id)
+		const cart = await user.getCart()
 		const products = await cart.getProducts()
 		res.json(products)
 	} catch (e) {
@@ -50,14 +53,14 @@ export const getCart = async (req, res, next) => {
 export const postCart = async (req, res, next) => {
 	try {
 		const prodId = req.body.productId
-
-		const cart = await req.user.getCart()
+		const user = await User.findByPk(req.user.id)
+		const cart = await user.getCart()
 
 		const products = await cart.getProducts({ where: { id: prodId } })
 
 		let product
 		if (products.length > 0) {
-			product = products[0]
+			;[ product ] = products
 		}
 		let newQuantity = 1
 
@@ -72,7 +75,7 @@ export const postCart = async (req, res, next) => {
 
 			await cart.addProduct(product, { through: { quantity: newQuantity } })
 
-			res.json(product)
+			return res.json(product)
 		}
 
 		product = await Product.findById(prodId)
@@ -87,7 +90,8 @@ export const postCart = async (req, res, next) => {
 
 export const deleteCartItem = async (req, res, next) => {
 	try {
-		const cart = await req.user.getCart()
+		const user = await User.findByPk(req.user.id)
+		const cart = await user.getCart()
 		const productId = req.params.productid
 
 		const product = await cart.getProducts({ where: { id: productId } })
@@ -102,11 +106,12 @@ export const deleteCartItem = async (req, res, next) => {
 
 export const postOrder = async (req, res, next) => {
 	try {
-		const cart = await req.user.getCart()
+		const user = await User.findByPk(req.user.id)
+		const cart = await user.getCart()
 
 		const products = await cart.getProducts()
 
-		const order = await req.user.createOrder()
+		const order = await user.createOrder()
 
 		const orderProducts = await order.addProducts(
 			products.map((product) => {
@@ -120,5 +125,16 @@ export const postOrder = async (req, res, next) => {
 		res.json(orderProducts)
 	} catch (e) {
 		console.log(e)
+	}
+}
+
+export const getOrders = async (req, res, next) => {
+	try {
+		const user = await User.findByPk(req.user.id)
+		const orders = await user.getOrders({ include: [ 'products' ] })
+
+		res.json(orders)
+	} catch (e) {
+		res.status(400).json(e)
 	}
 }

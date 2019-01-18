@@ -1,4 +1,5 @@
 import Product from '../models/product'
+import User from '../models/user'
 
 import addProductValidation from '../validation/addProduct'
 
@@ -20,7 +21,11 @@ export const addProduct = async (req, res, next) => {
 		// 	userId: req.user.id
 		// })
 		// Or sequealize creates createProduct on user (like in prisma)
-		const product = await req.user.createProduct({
+
+		console.log(req.user)
+		const user = await User.findByPk(req.user.id)
+
+		const product = await user.createProduct({
 			title,
 			imageUrl,
 			price,
