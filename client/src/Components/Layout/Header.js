@@ -1,12 +1,12 @@
 import React from 'react'
 import StyledHeader from '../../styles/layout/StyledHeader';
 import Nav from './Nav';
-import Slider from './Slider';
+// import Slider from './Slider';
 
 const Header = () => {
     return (
         <StyledHeader>
-            <Slider />
+            {/* <Slider /> */}
             <Nav />
         </StyledHeader>
     )

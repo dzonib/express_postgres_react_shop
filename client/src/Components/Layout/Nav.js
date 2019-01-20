@@ -1,30 +1,37 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { logoutUser } from '../../redux/actions/auth/auth'
+import AdminNav from './AdminNav'
+import LoggedInNav from './LoggedInNav'
+import LoggedOutNav from './LoggedOut'
 
-const Nav = () => {
-	return (
-		<ul>
-			<li>
-				<NavLink to="/">Shop</NavLink>
-			</li>
-			
-			<li>
-				<NavLink to="/products">Products</NavLink>
-			</li>
-			<li>
-				<NavLink to="/cart">Cart</NavLink>
-			</li>
-			<li>
-				<NavLink to="/orders">Order</NavLink>
-			</li>
-			<li>
-				<NavLink to="/add-product">Add Product</NavLink>
-			</li>
-			<li>
-				<NavLink to="/admin/products">Admin Products</NavLink>
-			</li>
-		</ul>
-	)
+class Nav extends Component {
+	logoutHandler = (e) => {
+		e.preventDefault()
+		this.props.logoutUser()
+	}
+
+	render() {
+		const { isAuth, user } = this.props.auth
+
+		if (isAuth && user.isAdmin) {
+			return <AdminNav logout={this.logoutHandler} />
+		}
+
+		if (isAuth) {
+			return <LoggedInNav logout={this.logoutHandler} />
+		}
+
+		if (!isAuth) {
+			return <LoggedOutNav />
+		}
+	}
 }
 
-export default Nav
+const mapStateToProps = (state) => {
+	return {
+		auth: state.authReducer
+	}
+}
+
+export default connect(mapStateToProps, { logoutUser })(Nav)

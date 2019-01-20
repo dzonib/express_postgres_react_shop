@@ -7,13 +7,20 @@ import auth from '../../middleware/auth'
 
 const router = express.Router()
 
+import registerValidation from '../../validation/register'
+import loginValidation from '../../validation/login'
+
 // register
 router.post('/register', async (req, res, next) => {
-	const { name, email, password } = req.body
+	const { errors, isValid } = registerValidation(req.body)
 	try {
-		const userCheck = await User.findOne({ where: { email } })
+		if (!isValid) {
+			return res.status(400).json(errors)
+		}
 
-		console.log(JSON.stringify(userCheck, null, 4))
+		const { name, email, password } = req.body
+
+		const userCheck = await User.findOne({ where: { email } })
 
 		if (!userCheck) {
 			const hashedPassword = await bcrypt.hash(password, 10)
@@ -24,11 +31,13 @@ router.post('/register', async (req, res, next) => {
 				password: hashedPassword
 			})
 
-            newUser.createCart({})
+			newUser.createCart({})
 
 			res.json(newUser)
+		} else {
+			errors.email = 'User already registered'
+			res.status(400).json(errors)
 		}
-		res.json({ errors: { password: 'User already registered' } })
 	} catch (e) {
 		console.log(e.message)
 	}
@@ -37,6 +46,12 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
 	const { email, password } = req.body
 	try {
+		const { isValid, errors } = loginValidation(req.body)
+
+		if (!isValid) {
+			return res.status(400).json(errors)
+		}
+
 		const user = await User.findOne({ where: { email } })
 
 		if (!user) {
@@ -46,28 +61,28 @@ router.post('/login', async (req, res, next) => {
 		const checkPassword = await bcrypt.compare(password, user.password)
 
 		if (!checkPassword) {
-			res.status(400).json({ password: 'Wrong' })
+			res.status(400).json(errors.password = "Wrong password or email")
 		}
 
 		const token = await jwt.sign(
 			{
 				id: user.id,
 				name: user.name,
-				email: user.email
+				email: user.email,
+				isAdmin: user.isAdmin
 			},
 			'secret',
 			{ expiresIn: '12h' }
 		)
 
-		res.json(`Bearer ${token}`)
+		res.json({token: `Bearer ${token}`})
 	} catch (e) {
 		console.log(e.message)
 	}
 })
 
 router.get('/protected', auth, (req, res, next) => {
-    res.json(req.user)
+	res.json(req.user)
 })
-
 
 export default router

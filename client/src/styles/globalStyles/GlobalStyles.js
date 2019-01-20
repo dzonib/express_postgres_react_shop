@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        font-family: 'Courier New', Courier, monospace;
+        font-family: 'Permanent Marker', cursive;
         margin: 0;
         padding: 0;
         font-size: 1.6rem;

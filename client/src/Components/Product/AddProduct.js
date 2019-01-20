@@ -39,4 +39,10 @@ class AddProduct extends Component {
 	}
 }
 
+// const mapStateToProps = state => {
+// 	return {
+// 		auth: state.authReducer
+// 	}
+// }
+
 export default connect(null, { addProduct })(AddProduct)

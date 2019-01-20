@@ -22,7 +22,6 @@ export const addProduct = async (req, res, next) => {
 		// })
 		// Or sequealize creates createProduct on user (like in prisma)
 
-		console.log(req.user)
 		const user = await User.findByPk(req.user.id)
 
 		const product = await user.createProduct({
