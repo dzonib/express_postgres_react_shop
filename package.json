@@ -31,6 +31,7 @@
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
     "cors": "^2.8.5",
+    "event-stream": "^4.0.1",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
     "pg": "^7.6.1",
