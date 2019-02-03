@@ -6,7 +6,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from '../../types'
 
 export const registerUser = (userData, history) => async (dispatch) => {
 	try {
-		await axios.post('http://localhost:5000/api/user/register', userData)
+		await axios.post('https://ecomerceyo.herokuapp.com/api/user/register', userData)
 
 		history.push('/login')
 	} catch (e) {

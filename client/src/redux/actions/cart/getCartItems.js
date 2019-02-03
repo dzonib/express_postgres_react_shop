@@ -3,7 +3,7 @@ import { GET_CART } from '../../types'
 
 export const getCartItems = () => async dispatch => {
     try {
-        const res = await axios.get('http://localhost:5000/api/shop/cartandproducts')
+        const res = await axios.get('https://ecomerceyo.herokuapp.com/api/shop/cartandproducts')
         dispatch({
             type: GET_CART,
             payload: res.data

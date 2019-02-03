@@ -23,6 +23,10 @@ class Login extends Component {
 		this.props.loginUser({ email, password }, this.props.history)
 	}
 
+	static getDerivedStateFromProps(nextProps) {
+		return nextProps.errors && {errors: nextProps.errors}
+	}
+
 	render() {
 		return (
 			<StyledAuthForm onSubmit={this.submitHandler}>
@@ -31,12 +35,13 @@ class Login extends Component {
 				<h3 style={{margin: '0.3rem', color: 'brown'}}>Admin credentials:</h3>
 				<p style={{margin: '0.3rem', color: 'brown'}}>email: admin@test.com</p>
 				<p style={{margin: '0.3rem', color: 'brown'}}>password: 123456</p>
-				<InputAndLabel type="text" name="email" value={this.state.email} onChange={this.onChangeHandler} />
+				<InputAndLabel type="text" errors={this.state.errors.email} name="email" value={this.state.email} onChange={this.onChangeHandler} />
 				<InputAndLabel
 					type="password"
 					name="password"
 					value={this.state.password}
 					onChange={this.onChangeHandler}
+					errors={this.state.errors.password}
 				/>
 				<StyledButton>Sign in</StyledButton>
 			</StyledAuthForm>

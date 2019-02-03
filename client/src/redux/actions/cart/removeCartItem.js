@@ -4,7 +4,7 @@ import { getCartItems } from './getCartItems';
 export const removeCartItem = id => async dispatch => {
     try {
         console.log('asaa')
-        await axios.delete(`http://localhost:5000/api/shop/cartandproduct/${id}`)
+        await axios.delete(`https://ecomerceyo.herokuapp.com/api/shop/cartandproduct/${id}`)
 
         dispatch(getCartItems())
     } catch(e) {

@@ -45,6 +45,7 @@ router.post('/register', async (req, res, next) => {
 	}
 })
 
+// login
 router.post('/login', async (req, res, next) => {
 	const { email, password } = req.body
 	try {
@@ -63,7 +64,9 @@ router.post('/login', async (req, res, next) => {
 		const checkPassword = await bcrypt.compare(password, user.password)
 
 		if (!checkPassword) {
-			res.status(400).json((errors.password = 'Wrong password or email'))
+			errors.email = 'Wrong email or password'
+			errors.password = 'Wrong email or password'
+			res.status(400).json(errors)
 		}
 
 		const token = await jwt.sign(

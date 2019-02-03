@@ -6,7 +6,7 @@ export const getProduct = (id, history, update) => async (dispatch) => {
         type: LOADING
     })
 	try {
-		const product = await axios.get(`http://localhost:5000/api/shop/get-product/${id}`)
+		const product = await axios.get(`https://ecomerceyo.herokuapp.com/api/shop/get-product/${id}`)
 
         dispatch({
             type: "SET_LOADING"
