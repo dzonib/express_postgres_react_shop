@@ -5,7 +5,7 @@ const LoggedOutNav = () => {
 	return (
 		<ul>
 			<li>
-				<NavLink to="/">Shop</NavLink>
+				<NavLink to="/products/1">Shop</NavLink>
 			</li>
 			<li>
 				<NavLink to="/login">Sign In</NavLink>

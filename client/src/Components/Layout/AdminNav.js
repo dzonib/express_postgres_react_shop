@@ -5,10 +5,7 @@ const AdminNav = (props) => {
 	return (
 		<ul>
 			<li>
-				<NavLink to="/">Shop</NavLink>
-			</li>
-			<li>
-				<NavLink to="/products">Products</NavLink>
+				<NavLink to="/products/1">Shop</NavLink>
 			</li>
 			<li>
 				<NavLink to="/cart">Cart</NavLink>
@@ -20,7 +17,7 @@ const AdminNav = (props) => {
 				<NavLink to="/add-product">Add Product</NavLink>
 			</li>
 			<li>
-				<NavLink to="/admin/products">Admin Products</NavLink>
+				<NavLink to="/admin/products/1">Admin Products</NavLink>
 			</li>
 			<li>
 				<NavLink to="#" onClick={props.logout}>

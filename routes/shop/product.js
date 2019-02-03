@@ -14,9 +14,9 @@ import {
 
 const router = express.Router()
 
-router.get('/get-products', auth, getProducts)
+router.get('/get-products/:page', getProducts)
 
-router.get('/get-product/:id', auth, getProduct)
+router.get('/get-product/:id', getProduct)
 
 router.get('/cart', auth, getCart)
 

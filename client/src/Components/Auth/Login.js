@@ -27,6 +27,10 @@ class Login extends Component {
 		return (
 			<StyledAuthForm onSubmit={this.submitHandler}>
 				<h1>Sign in, yo yo</h1>
+				<small>Admin can only be assigned by database administrator</small>
+				<h3 style={{margin: '0.3rem', color: 'brown'}}>Admin credentials:</h3>
+				<p style={{margin: '0.3rem', color: 'brown'}}>email: admin@test.com</p>
+				<p style={{margin: '0.3rem', color: 'brown'}}>password: 123456</p>
 				<InputAndLabel type="text" name="email" value={this.state.email} onChange={this.onChangeHandler} />
 				<InputAndLabel
 					type="password"

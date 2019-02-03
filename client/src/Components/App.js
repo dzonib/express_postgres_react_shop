@@ -10,6 +10,7 @@ import GlobalStyle from '../styles/globalStyles/GlobalStyles'
 import AddProduct from './Product/AddProduct'
 import CartItemsList from './Product/CartItemsList'
 import store from '../redux/store'
+import Landing from './Layout/Landing'
 import ProductDetails from './Product/ProductDetails'
 import UpdateProduct from './Product/UpdateProduct'
 import ProductsInUsersCart from './Cart/ProductsInUsersCart'
@@ -38,9 +39,10 @@ class App extends Component {
 						<>
 							<Header />
 							<Switch>
-								<Route exact path='/' component={CartItemsList} />
+								<Route exact path="/" component={Landing} />
+								<Route exact path='/products/:page' component={CartItemsList} />
 								<Route exact path='/add-product' component={AddProduct} />
-								<Route exact path='/admin/products' component={CartItemsList} />
+								<Route exact path='/admin/products/:page' component={CartItemsList} />
 								<Route exact path='/get-product/:id' component={ProductDetails} />
 								<Route exact path='/product/update' component={UpdateProduct} />
 								<Route exact path='/cart' component={ProductsInUsersCart} />

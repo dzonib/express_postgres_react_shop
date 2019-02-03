@@ -6,10 +6,7 @@ const LoggedInNav = (props) => {
 		<ul>
 			<ul>
 				<li>
-					<NavLink to="/">Shop</NavLink>
-				</li>
-				<li>
-					<NavLink to="/products">Products</NavLink>
+					<NavLink to="/products/1">Shop</NavLink>
 				</li>
 				<li>
 					<NavLink to="/cart">Cart</NavLink>

@@ -10,6 +10,8 @@ const router = express.Router()
 import registerValidation from '../../validation/register'
 import loginValidation from '../../validation/login'
 
+import Product from '../../models/product'
+
 // register
 router.post('/register', async (req, res, next) => {
 	const { errors, isValid } = registerValidation(req.body)
@@ -61,7 +63,7 @@ router.post('/login', async (req, res, next) => {
 		const checkPassword = await bcrypt.compare(password, user.password)
 
 		if (!checkPassword) {
-			res.status(400).json(errors.password = "Wrong password or email")
+			res.status(400).json((errors.password = 'Wrong password or email'))
 		}
 
 		const token = await jwt.sign(
@@ -75,7 +77,7 @@ router.post('/login', async (req, res, next) => {
 			{ expiresIn: '12h' }
 		)
 
-		res.json({token: `Bearer ${token}`})
+		res.json({ token: `Bearer ${token}` })
 	} catch (e) {
 		console.log(e.message)
 	}
@@ -83,6 +85,27 @@ router.post('/login', async (req, res, next) => {
 
 router.get('/protected', auth, (req, res, next) => {
 	res.json(req.user)
+})
+
+router.get('/test/:page', async (req, res, next) => {
+	let limit = 3
+	let offset = 0
+	let page = req.params.page
+
+	const allProducts = await Product.findAndCountAll()
+
+	let pages = Math.ceil(allProducts.count / limit)
+
+	offset = limit * (page - 1)
+
+	const products = await Product.findAll({
+		limit,
+		offset
+	})
+
+	// console.log(JSON.stringify(pages, null, 4))
+
+	res.json({ result: products, pages, count: allProducts.count })
 })
 
 export default router

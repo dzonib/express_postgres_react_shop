@@ -1,13 +1,25 @@
-import { GET_PRODUCTS, GET_PRODUCT, GET_CART } from "../../types"
+import { GET_PRODUCTS, GET_PRODUCT, GET_CART, LOADING } from "../../types"
 
 const initialState = {
 	products: [],
 	product: {},
-	cart: []
+	cart: [],
+	loading: true
 }
+
 
 const addProductReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case 'SET_LOADING':
+			return {
+				...state,
+				loading: true
+			}
+		case LOADING:
+			return {
+				...state,
+				loading: false
+			}
 		case GET_PRODUCT:
 			return {
 				...state,

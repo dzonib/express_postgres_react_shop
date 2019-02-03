@@ -3,8 +3,22 @@ import User from '../models/user'
 
 export const getProducts = async (req, res, next) => {
 	try {
-		const products = await Product.findAll()
-		res.json(products)
+		let limit = 3
+		let offset = 0
+		let page = req.params.page
+
+		const allProducts = await Product.findAndCountAll()
+
+		let pages = Math.ceil(allProducts.count / limit)
+
+		offset = limit * (page - 1)
+
+		const products = await Product.findAll({
+			limit,
+			offset
+		})
+
+		res.json({ result: products, pages, count: allProducts.count })
 	} catch (e) {
 		res.status(400).json(e)
 	}
@@ -60,7 +74,7 @@ export const postCart = async (req, res, next) => {
 
 		let product
 		if (products.length > 0) {
-			;[ product ] = products
+			[ product ] = products
 		}
 		let newQuantity = 1
 

@@ -32,7 +32,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
 			payload: token
 		})
 
-		history.push('/shop')
+		history.push('/products/1')
 	} catch (e) {
 		dispatch({
 			type: GET_ERRORS,
