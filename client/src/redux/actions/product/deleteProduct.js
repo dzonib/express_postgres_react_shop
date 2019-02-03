@@ -5,7 +5,7 @@ export const deleteProduct = (id) => async dispatch => {
     try {
         if (window.confirm("Are you sure you want to delete 'title' ?")) {
             await axios.delete(`https://ecomerceyo.herokuapp.com/api/admin/delete-product/${id}`)
-            dispatch(getProducts())
+            dispatch(getProducts(1))
         }
     } catch(e) {
         console.log(e)
