@@ -19,7 +19,7 @@ export const registerUser = (userData, history) => async (dispatch) => {
 
 export const loginUser = (userData, history) => async (dispatch) => {
 	try {
-        const res = await axios.post('https://ecomerceyo.herokuapp.com/api/user/login', userData)
+        const res = await axios.post('http://localhost:5000/api/user/login', userData)
 
         localStorage.setItem('jwt', res.data.token)
 

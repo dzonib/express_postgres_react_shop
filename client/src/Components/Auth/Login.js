@@ -24,7 +24,7 @@ class Login extends Component {
 	}
 
 	static getDerivedStateFromProps(nextProps) {
-		return nextProps.errors && {errors: nextProps.errors}
+		return nextProps.errors ? {errors: nextProps.errors} : {}
 	}
 
 	render() {
@@ -50,7 +50,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return {}
+	return {errors: state.errorsReducer}
 }
 
 export default connect(mapStateToProps, { loginUser })(Login)

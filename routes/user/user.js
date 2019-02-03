@@ -58,14 +58,14 @@ router.post('/login', async (req, res, next) => {
 		const user = await User.findOne({ where: { email } })
 
 		if (!user) {
-			res.status(404).json({ user: 'Not rigistered!' })
+			errors.email = 'Not rigistered!'
+			res.status(404).json(errors)
 		}
 
 		const checkPassword = await bcrypt.compare(password, user.password)
 
 		if (!checkPassword) {
 			errors.email = 'Wrong email or password'
-			errors.password = 'Wrong email or password'
 			res.status(400).json(errors)
 		}
 
