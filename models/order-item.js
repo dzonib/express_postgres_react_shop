@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize'
+const Sequelize = require('sequelize')
 
-import sequelize from '../db/database'
+const sequelize = require('../db/database')
 
 
 const OrderItem = sequelize.define('orderItem', {
@@ -13,4 +13,4 @@ const OrderItem = sequelize.define('orderItem', {
     quantity: Sequelize.INTEGER
 })
 
-export default OrderItem
+module.exports = OrderItem

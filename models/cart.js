@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize'
+const Sequelize = require('sequelize')
 
-import sequelize from '../db/database'
+const sequelize = require('../db/database')
 
 
 const Cart = sequelize.define('cart', {
@@ -12,4 +12,4 @@ const Cart = sequelize.define('cart', {
     }
 })
 
-export default Cart
+module.exports = Cart

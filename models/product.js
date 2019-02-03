@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize'
+const Sequelize = require('sequelize')
 
-import sequelize from '../db/database'
+const sequelize = require('../db/database')
 
 const Product = sequelize.define('product', {
 	id: {
@@ -28,4 +28,4 @@ const Product = sequelize.define('product', {
 })
 
 
-export default Product
+module.exports = Product

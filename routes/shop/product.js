@@ -1,7 +1,7 @@
-import express from 'express'
-import auth from '../../middleware/auth'
+const express = require('express')
+const auth = require('../../middleware/auth')
 
-import {
+const {
 	getProducts,
 	getProduct,
 	getCart,
@@ -10,7 +10,7 @@ import {
 	deleteCartItem,
 	postOrder,
 	getOrders
-} from '../../controllers/shop'
+}  = require('../../controllers/shop')
 
 const router = express.Router()
 
@@ -30,4 +30,4 @@ router.post('/postorders', auth, postOrder)
 
 router.get('/getorders', auth, getOrders)
 
-export default router
+module.exports = router

@@ -1,7 +1,7 @@
-import express from 'express'
-import auth from '../../middleware/auth'
+const express = require('express')
+const auth = require('../../middleware/auth')
 
-import { addProduct, updateProduct, deleteProduct } from '../../controllers/admin'
+const { addProduct, updateProduct, deleteProduct } = require('../../controllers/admin')
 
 const router = express.Router()
 
@@ -18,4 +18,4 @@ router.get('/getuser',auth, (req, res) => {
 
 
 
-export default router
+module.exports = router

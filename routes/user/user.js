@@ -1,16 +1,16 @@
-import express from 'express'
+const express = require('express')
 
-import User from '../../models/user'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import auth from '../../middleware/auth'
+const User = require('../../models/user')
+const bcrypt  = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const auth = require('../../middleware/auth')
 
 const router = express.Router()
 
-import registerValidation from '../../validation/register'
-import loginValidation from '../../validation/login'
+const registerValidation  = require('../../validation/register')
+const loginValidation = require('../../validation/login')
 
-import Product from '../../models/product'
+const Product = require('../../models/product')
 
 // register
 router.post('/register', async (req, res, next) => {
@@ -108,4 +108,4 @@ router.get('/test/:page', async (req, res, next) => {
 	res.json({ result: products, pages, count: allProducts.count })
 })
 
-export default router
+module.exports = router

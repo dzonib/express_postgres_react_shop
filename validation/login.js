@@ -1,8 +1,8 @@
-import Validator from 'validator'
+const Validator = require('validator') 
 
-import isEmpty from "./isEmpty";
+const isEmpty = require('./isEmpty') 
 
-export default (userInput) => {
+module.exports = (userInput) => {
 
     const errors = {}
 

@@ -1,9 +1,9 @@
-import Product from '../models/product'
-import User from '../models/user'
+const Product = require('../models/product')
+const User = require('../models/user')
 
-import addProductValidation from '../validation/addProduct'
+const addProductValidation = require('../validation/addProduct')
 
-export const addProduct = async (req, res, next) => {
+const addProduct = async (req, res, next) => {
 	const { errors, isValid } = addProductValidation(req.body)
 
 	if (!isValid) {
@@ -38,7 +38,7 @@ export const addProduct = async (req, res, next) => {
 	}
 }
 
-export const updateProduct = async (req, res, next) => {
+const updateProduct = async (req, res, next) => {
 	req.body.price = String(req.body.price)
 	try {
 		const { errors, isValid } = addProductValidation(req.body)
@@ -63,7 +63,7 @@ export const updateProduct = async (req, res, next) => {
 	}
 }
 
-export const deleteProduct = async (req, res, next) => {
+const deleteProduct = async (req, res, next) => {
 	try {
 		const product = await Product.destroy({ where: { id: req.params.id } })
 
@@ -71,4 +71,11 @@ export const deleteProduct = async (req, res, next) => {
 	} catch (e) {
 		console.log(e)
 	}
+}
+
+
+module.exports = {
+	addProduct,
+	deleteProduct,
+	updateProduct
 }

@@ -4,13 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "npm run build && node ./build/index.js",
-    "build": "npm run clean && npm run build-babel",
-    "server": "nodemon server.js --exec babel-node",
+    "start": "node server.js",
+    "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build ./src -s",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
@@ -24,9 +21,6 @@
   },
   "homepage": "https://github.com/dzonib/mern_shop#readme",
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",

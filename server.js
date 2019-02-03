@@ -1,18 +1,18 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import path from 'path'
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors  = require('cors')
+const path = require('path') 
 
-import productRoutes from './routes/admin/product'
-import shopRoutes from './routes/shop/product'
-import userRoutes from './routes/user/user'
-import sequelize from './db/database'
-import Product from './models/product'
-import User from './models/user'
-import Cart from './models/cart'
-import CartItem from './models/cart-item'
-import Order from './models/order'
-import OrderItem from './models/order-item'
+const productRoutes =require('./routes/admin/product')
+const shopRoutes = require('./routes/shop/product') 
+const userRoutes = require('./routes/user/user') 
+const sequelize = require('./db/database') 
+const Product = require ('./models/product')
+const User = require('./models/user') 
+const Cart = require('./models/cart')
+const CartItem = require('./models/cart-item') 
+const Order = require('./models/order') 
+const OrderItem =  require('./models/order-item')
 
 const app = express()
 

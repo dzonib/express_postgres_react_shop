@@ -1,7 +1,7 @@
-import Product from '../models/product'
-import User from '../models/user'
+const Product = require('../models/product')
+const User = require('../models/user')
 
-export const getProducts = async (req, res, next) => {
+const getProducts = async (req, res, next) => {
 	try {
 		let limit = 3
 		let offset = 0
@@ -24,7 +24,7 @@ export const getProducts = async (req, res, next) => {
 	}
 }
 
-export const getProduct = async (req, res, next) => {
+const getProduct = async (req, res, next) => {
 	try {
 		const product = await Product.findByPk(req.params.id)
 		res.json(product)
@@ -33,7 +33,7 @@ export const getProduct = async (req, res, next) => {
 	}
 }
 
-export const getCartAndProduct = async (req, res, next) => {
+const getCartAndProduct = async (req, res, next) => {
 	try {
 		const user = await User.findByPk(req.user.id)
 		const cart = await user.getCart()
@@ -53,7 +53,7 @@ export const getCartAndProduct = async (req, res, next) => {
 	}
 }
 
-export const getCart = async (req, res, next) => {
+const getCart = async (req, res, next) => {
 	try {
 		const user = await User.findByPk(req.user.id)
 		const cart = await user.getCart()
@@ -64,7 +64,7 @@ export const getCart = async (req, res, next) => {
 	}
 }
 
-export const postCart = async (req, res, next) => {
+const postCart = async (req, res, next) => {
 	try {
 		const prodId = req.body.productId
 		const user = await User.findByPk(req.user.id)
@@ -102,7 +102,7 @@ export const postCart = async (req, res, next) => {
 	}
 }
 
-export const deleteCartItem = async (req, res, next) => {
+const deleteCartItem = async (req, res, next) => {
 	try {
 		const user = await User.findByPk(req.user.id)
 		const cart = await user.getCart()
@@ -118,7 +118,7 @@ export const deleteCartItem = async (req, res, next) => {
 	}
 }
 
-export const postOrder = async (req, res, next) => {
+const postOrder = async (req, res, next) => {
 	try {
 		const user = await User.findByPk(req.user.id)
 		const cart = await user.getCart()
@@ -142,7 +142,7 @@ export const postOrder = async (req, res, next) => {
 	}
 }
 
-export const getOrders = async (req, res, next) => {
+const getOrders = async (req, res, next) => {
 	try {
 		const user = await User.findByPk(req.user.id)
 		const orders = await user.getOrders({ include: [ 'products' ] })
@@ -151,4 +151,16 @@ export const getOrders = async (req, res, next) => {
 	} catch (e) {
 		res.status(400).json(e)
 	}
+}
+
+
+module.exports = {
+	getOrders,
+	postOrder,
+	deleteCartItem,
+	postCart,
+	getCart,
+	getCartAndProduct,
+	getProduct,
+	getProducts
 }
